@@ -4,6 +4,8 @@ const db=require('./db');
 const person=require('./model.js');
 const bodyParser = require('body-parser')
 const MenuItem = require("./menu");
+require('dotenv').config();
+
 
 app.use(bodyParser.json()); //req-body
 
@@ -21,7 +23,7 @@ app.use('/menu',menuRoutes)
 
 
 
-const PORT=3000;
+const PORT=  process.env.PORT||3000;
 app.listen(PORT,()=>{
     console.log(`Server is running at http://localhost:${PORT}`)
 })

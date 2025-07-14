@@ -1,6 +1,6 @@
 const express=require('express');
 const route=express.Router();
-const MenuItem=require('./menu')
+const MenuItem=require('./menu_model'); // Import the MenuItem model
 
 
 route.post("/", async (req, res) => {

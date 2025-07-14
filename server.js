@@ -7,8 +7,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const db = require('./db');                  // MongoDB connection
-const Person = require('./model');           // Person schema
-const MenuItem = require('./menu');          // Menu schema
+const Person = require('./person_model');           // Person schema
+const MenuItem = require('./menu_model');          // Menu schema
 
 const personRoutes = require('./personRoutes');
 const menuRoutes = require('./menuRoutes');

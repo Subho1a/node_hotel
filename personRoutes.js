@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const person=require('./model.js')
+const person=require('./person_model.js')
 const { jwtAuthenticationMiddleware,generateToken } = require('./jwt'); // Import JWT middleware
 
 router.post('/signup', async(req,res)=>{

@@ -33,7 +33,7 @@ const LocalAuthenticationMiddleware = passport.authenticate('local', { session: 
 
 // Routes
 app.get('/',  (req, res) => {
-    res.send('Hi there');
+    res.send('Hi There,Welcome to My Hotel');
 });
 app.use('/person',  personRoutes);
 app.use('/menu',   menuRoutes);

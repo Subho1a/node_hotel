@@ -25,7 +25,7 @@ route.post("/", async (req, res) => {
 route.get("/", async (req, res) => {
   try {
     const data = await MenuItem.find();
-    console.log("data saved");
+    console.log("Data Fetch Successfully");
     res.status(200).json(data);
   } 
   catch (error) {

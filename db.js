@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-// const mongoURL = 'mongodb://localhost:27017/hotel';
+// const mongoURL = process.env.DB_LOCAL_URL ;    // Use the local MongoDB URL for development
+// If you want to use the cloud MongoDB URL, uncomment the line below
 const mongoURL = process.env.DB_url;
 
 // Connect to MongoDB
-mongoose.connect(mongoURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+mongoose.connect(mongoURL);
 
 const db = mongoose.connection;
 

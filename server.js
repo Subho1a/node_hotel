@@ -1,29 +1,45 @@
-const express=require('express');
-const app=express();
-const db=require('./db');
-const person=require('./model.js');
-const bodyParser = require('body-parser')
-const MenuItem = require("./menu");
-require('dotenv').config();
+require('dotenv').config(); // Load environment variables
+
+const express = require('express');
 
 
-app.use(bodyParser.json()); //req-body
+const bodyParser = require('body-parser');
+const app = express();
 
-app.get('/',function(req,res){
-    res.send('hi there')
-})
+const db = require('./db');                  // MongoDB connection
+const Person = require('./model');           // Person schema
+const MenuItem = require('./menu');          // Menu schema
+
+const personRoutes = require('./personRoutes');
+const menuRoutes = require('./menuRoutes');
+const { assign } = require('lodash');
+const passport = require('./auth');          // Authentication middleware
+
+// Middleware to log requests
+const logRequest = (req, res, next) => {
+    console.log(`[${new Date().toLocaleString()}]--Request made to: ${req.originalUrl}`);
+    next();
+};
 
 
 
-const personRoutes=require('./personRoutes.js') // import thr router files
-app.use('/person',personRoutes)   //use the router
 
-const menuRoutes=require('./menuRoutes.js')
-app.use('/menu',menuRoutes)
+// Middleware setup
+app.use(bodyParser.json());
+app.use(logRequest);
+app.use(passport.initialize());
+const LocalAuthenticationMiddleware = passport.authenticate('local', { session: false });
 
 
+// Routes
+app.get('/',  (req, res) => {
+    res.send('Hi there');
+});
+app.use('/person',  personRoutes);
+app.use('/menu',   menuRoutes);
 
-const PORT=  process.env.PORT||3000;
-app.listen(PORT,()=>{
-    console.log(`Server is running at http://localhost:${PORT}`)
-})
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`✅ Server is running at http://localhost:${PORT}`);
+});
